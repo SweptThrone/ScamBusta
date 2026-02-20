@@ -37,7 +37,7 @@ function BustScams( msg ) {
 		.then( function( mbr ) {
 			msg.guild.channels.fetch( AUTOLOG_CHANNEL_ID )
 			.then( function( autologChannel ) {
-				let sendStr = `⚠️ <@${ mbr.user.id }> sent four images in one message.\nThe image URLs have been included to investigate, but they probably 404.`
+				let sendStr = `⚠️ <@${ mbr.user.id }> sent four images in one message in <#${ msg.channel.id }>.\nThe image URLs have been included to investigate, but they probably 404.`
 				for ( let e of msg.attachments ) {
 					sendStr += `\n<${ e[ 1 ].url }>`
 				}

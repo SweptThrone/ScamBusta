@@ -15,8 +15,20 @@ console.log( "Loaded token from " + dataDir + "/.token" )
 const AUTOLOG_CHANNEL_ID = "1226351104355205180"
 const DS_SERVER_ID = "869757940201046017"
 
+let numScams = 0
+
 client.on( "ready", function() {
     console.log( "ScamBusta online" )
+
+	// this WILL throw an error because the file does not exist, too bad!
+	fs.readFile( dataDir + "/caught.txt", { encoding: "utf-8" }, function( err, num ) {
+		if ( err ) {
+			console.error( err )
+		} else {
+			numScams = num
+			client.user.setPresence( { activities: [ { name: "💪 Busted " + num + " scams", type: Discord.ActivityType.Custom } ] } )
+		}
+	} )
 } )
 
 client.on( "error", function( err ) {
@@ -38,6 +50,13 @@ function BustScams( msg ) {
 			msg.guild.channels.fetch( AUTOLOG_CHANNEL_ID )
 			.then( function( autologChannel ) {
 				let sendStr = `⚠️ <@${ mbr.user.id }> sent four images in one message in <#${ msg.channel.id }>.\nThe image URLs have been included to investigate, but they probably 404.`
+				numScams++
+				client.user.setPresence( { activities: [ { name: "💪 Busted " + numScams + " scams", type: Discord.ActivityType.Custom } ] } )
+				fs.writeFile( dataDir + "/caught.txt", numScams.toString(), function( err ) {
+					if ( err ) {
+						console.error( err )
+					}
+				} )
 				for ( let e of msg.attachments ) {
 					sendStr += `\n<${ e[ 1 ].url }>`
 				}

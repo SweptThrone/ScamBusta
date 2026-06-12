@@ -17,7 +17,7 @@ const DS_SERVER_ID = "869757940201046017"
 
 let numScams = 0
 
-client.on( "ready", function() {
+client.on( "clientReady", function() {
     console.log( "ScamBusta online" )
 
 	// this WILL throw an error because the file does not exist, too bad!

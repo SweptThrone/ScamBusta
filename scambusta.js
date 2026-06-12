@@ -44,7 +44,7 @@ function BustScams( msg ) {
 	}
 
 	// all of these scam bots seem to like sending four images every time
-	if ( msg.attachments.size == 4 && msg.member ) {
+	if ( ( msg.attachments.size == 4 || msg.attachments.size == 2 ) && msg.member ) {
 		msg.member.timeout( 60 * 60 * 1000, "Suspected scam images." )
 		.then( function( mbr ) {
 			msg.guild.channels.fetch( AUTOLOG_CHANNEL_ID )

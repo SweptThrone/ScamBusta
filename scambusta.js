@@ -14,6 +14,7 @@ const token = fs.readFileSync( dataDir + "/.token", { encoding: "utf-8" } )
 console.log( "Loaded token from " + dataDir + "/.token" )
 const AUTOLOG_CHANNEL_ID = "1226351104355205180"
 const DS_SERVER_ID = "869757940201046017"
+const HONEYPOT_CHANNEL_ID = "1516632597998862387"
 
 let numScams = 0
 
@@ -43,6 +44,11 @@ function BustScams( msg ) {
 		return
 	}
 
+	if ( msg.channel.id == HONEYPOT_CHANNEL_ID && msg.member.bannable ) {
+		msg.member.ban( { deleteMessageSeconds: 60 * 60 * 24 * 7, reason: "Posted in honeypot channel." } )
+			.catch( console.error )
+	}
+	
 	// all of these scam bots seem to like sending four images every time
 	if ( ( msg.attachments.size == 4 || msg.attachments.size == 2 ) && msg.member ) {
 		msg.member.timeout( 60 * 60 * 1000, "Suspected scam images." )

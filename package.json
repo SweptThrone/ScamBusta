@@ -1,0 +1,8 @@
+{
+	"name": "ScamBusta",
+	"version": "1.0.0",
+	"author": "SweptThrone",
+	"dependencies": {
+		"discord.js": "14.26.4"
+	}
+}

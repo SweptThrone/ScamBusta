@@ -33,7 +33,7 @@ This is only what it was tested on; I'm sure it runs on newer versions as well.
 8. Assuming you have not closed your terminal from step 3, enter `node scambusta.js`.
 > [!NOTE]  
 > You will get an error about a non-existent file every time the bot is started  
-> until it catches a scam.  This is normal, but if it ignores you, create a .txt  
+> until it catches a scam.  This is normal, but if it annoys you, create a .txt  
 > file named `caught.txt` next to `scambusta.js` and put `0` in it.
 
 ## Notes
